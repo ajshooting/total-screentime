@@ -3,9 +3,6 @@ import glob
 import os
 import datetime
 
-# ! デバッグ用
-import pprint
-
 
 def find_latest_db_file():
     db_files = glob.glob(
@@ -60,17 +57,9 @@ def extract_data(db_file):
             conn.close()
             return
 
-        data = []
+        # data.append(rows[0].keys())
 
-        data.append(rows[0].keys())
-
-        for row in rows:
-            data.append([row[key] for key in row.keys()])
-
-        # ! デバッグ用
-        pprint.pp(data)
-
-        return data
+        return [row for row in rows]
 
     except sqlite3.Error as e:
         print(f"SQLite error: {e}")
