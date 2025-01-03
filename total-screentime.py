@@ -1,7 +1,6 @@
 import sqlite3
 import glob
 import os
-import datetime
 
 
 def find_latest_db_file():
@@ -78,9 +77,43 @@ def main():
         data = extract_data(db_file)
     else:
         print("No matching database file found.")
-    
-    
+
+    total_time = 0
+    for row in data:
+        total_time += row["screentime_seconds"]
+
+    apps = {}
+    for row in data:
+        app = row["app"]
+        seconds = row["screentime_seconds"]
+        if app in apps:
+            apps[app] += seconds
+        else:
+            apps[app] = seconds
+    sorted_apps = sorted(apps.items(), key=lambda item: item[1], reverse=True)
+
+    # 出力
+    print("合計スクリーンタイム: " + str(total_time / 3600 / 24) + "日")
+    for n in range(10):
+        print(
+            str(n)
+            + ". "
+            + str(sorted_apps[n][0])
+            + "\t"
+            + str(sorted_apps[n][1] / 3600)
+            + "時間"
+        )
 
 
 if __name__ == "__main__":
     main()
+
+# なんかリッチに表示しようと試みてみた
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
+CYAN = "\033[36m"
+WHITE = "\033[37m"
+RESET = "\033[0m"
