@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.ajshooting.backup</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/bin/zsh</string>
+            <string>./run_backup.sh</string>
+        </array>
+        <key>StartCalendarInterval</key>
+        <array>
+            <dict>
+                <key>WeekOfMonth</key>
+                <integer>1</integer>
+                <key>Day</key>
+                <integer>7</integer>
+                <key>Hour</key>
+                <integer>0</integer>
+                <key>Minute</key>
+                <integer>0</integer>
+            </dict>
+            <dict>
+                <key>WeekOfMonth</key>
+                <integer>3</integer>
+                <key>Day</key>
+                <integer>7</integer>
+                <key>Hour</key>
+                <integer>0</integer>
+                <key>Minute</key>
+                <integer>0</integer>
+            </dict>
+        </array>
+        <key>StandardOutPath</key>
+        <string>./log/launchd.log</string>
+        <key>StandardErrorPath</key>
+        <string>./log/launchd_error.log</string>
+    </dict>
+</plist>
